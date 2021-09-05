@@ -4,7 +4,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Prompt';
+  font-family: 'Prompt', sans-serif;
   background-color: #bbc7d4;
 }
 

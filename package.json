@@ -6,11 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build && next export"
   },
   "dependencies": {
     "@types/node": "^16.7.10",
     "@types/react": "^17.0.19",
+    "firebase": "^9.0.1",
     "formik": "^2.2.9",
     "next": "11.1.2",
     "react": "17.0.2",
