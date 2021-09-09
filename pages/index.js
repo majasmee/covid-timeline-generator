@@ -9,12 +9,18 @@ const Home = () => {
   const [data, setData] = useState({})
   const [clickSubmit, setClickSubmit] = useState(false)
 
+  const [table, setTable] = useState([])
+  const genders = ['ชาย', 'หญิง']
+
   const formik = useFormik({
     initialValues: {},
     onSubmit: async (values, { setSubmitting }) => {
+      const { datetime, detail } = values;
       console.log(values)
       setData(values)
       setClickSubmit(true)
+
+      table.push({ datetime: datetime, detail: detail })
     }
   });
 
@@ -31,7 +37,7 @@ const Home = () => {
         <h1 className="">COVID Timeline Generator</h1>
       </div>
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-5">
           <form
             onSubmit={formik.handleSubmit}
             className="mb-3"
@@ -46,18 +52,24 @@ const Home = () => {
                       className="custom-select d-block w-100"
                       onChange={formik.handleChange}
                       name="gender"
+                      required
                     >
-                      <option value="ชาย">ชาย</option>
-                      <option value="หญิง">หญิง</option>
+                      <option value="">เลือกเพศ</option>
+                      {genders.map((gender, index) => (
+                        <option value={gender} key={index}>
+                          {gender}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="col-md-6">
                     <label className="form-label">อายุ</label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
                       name="age"
                       onChange={formik.handleChange}
+                      required
                     />
                   </div>
                 </div>
@@ -70,6 +82,7 @@ const Home = () => {
                       className="form-control"
                       name="job"
                       onChange={formik.handleChange}
+                      required
                     />
                   </div>
                 </div>
@@ -83,9 +96,10 @@ const Home = () => {
                   <input
                     type="datetime-local"
                     className="form-control"
-                    name="timeline"
+                    name="datetime"
                     onChange={formik.handleChange}
-                  />
+                    required
+                    />
                 </div>
               </div>
               <div className="row mb-3">
@@ -96,6 +110,7 @@ const Home = () => {
                     rows={5}
                     name="detail"
                     onChange={formik.handleChange}
+                    required
                   />
                 </div>
               </div>
@@ -112,10 +127,11 @@ const Home = () => {
             </div>
           </form>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-7">
           <Timeline
             value={data}
             clickSubmit={clickSubmit}
+            table={table}
           />
         </div>
       </div>
